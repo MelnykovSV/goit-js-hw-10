@@ -18,7 +18,10 @@ searchBox.addEventListener(
           return;
         }
         if (data.length > 10) {
-          console.log('to many countries found');
+          Notiflix.Notify.warning('To many countries found');
+          console.log('To many countries found');
+          countryInfo.classList.remove('active');
+          countryList.classList.remove('active');
           return;
         }
         // console.log(data);
@@ -27,6 +30,9 @@ searchBox.addEventListener(
       })
       .catch(error => {
         Notiflix.Notify.failure('Oops, there is no country with that name');
+        console.log(error);
+        countryInfo.classList.remove('active');
+        countryList.classList.remove('active');
       });
   }, 300)
 );
@@ -37,6 +43,7 @@ function inputToQuery() {
 
 function renderInfo({ name, capital, population, flags, languages }) {
   countryList.innerHTML = '';
+  countryList.classList.remove('active');
   console.log(name.official);
   console.log(capital[0]);
   console.log(population);
@@ -52,13 +59,14 @@ function renderInfo({ name, capital, population, flags, languages }) {
     capital[0]
   }</div><div class='country-info__population'><span class="bold">Population: </span>${population}</div><div class='country-info__languages'><span class="bold">Languages: </span>${Object.values(
     languages
-  )}</div>`;
+  ).join(', ')}</div>`;
 
-  console.log(markup);
+  // console.log(Object.values(languages).join(', '));
   countryInfo.classList.add('active');
   countryInfo.innerHTML = markup;
 }
 function renderList(arrayOfObjects) {
+  countryInfo.classList.remove('active');
   countryInfo.innerHTML = '';
   console.log('started');
   const listArray = arrayOfObjects.map(item => {
@@ -77,6 +85,5 @@ function renderList(arrayOfObjects) {
   countryList.innerHTML = markup;
   countryList.classList.add('active');
   console.log('markup: ' + markup);
-  console.log(done);
   return listArray;
 }
