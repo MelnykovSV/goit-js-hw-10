@@ -46,15 +46,16 @@ function renderInfo({ name, capital, population, flags, languages }) {
     flags.svg
   }" alt="Flag of ${
     name.official
-  }" width="200" height="" class="country-info__flag"/><p class="country-info__name">${
+  }" width="40" height="" class="country-info__flag"/><p class="country-info__name">${
     name.official
-  }</p></div><div class='country-info__capital'>${
+  }</p></div><div class='country-info__capital'><span class="bold">Capital: </span>${
     capital[0]
-  }</div><div class='country-info__population'>${population}</div><div class='country-info__languages'>${Object.values(
+  }</div><div class='country-info__population'><span class="bold">Population: </span>${population}</div><div class='country-info__languages'><span class="bold">Languages: </span>${Object.values(
     languages
   )}</div>`;
 
   console.log(markup);
+  countryInfo.classList.add('active');
   countryInfo.innerHTML = markup;
 }
 function renderList(arrayOfObjects) {
@@ -74,8 +75,7 @@ function renderList(arrayOfObjects) {
     .join('');
 
   countryList.innerHTML = markup;
-  countryList.classList.add('animate__animated');
-  countryList.classList.add('animate__slideInDown');
+  countryList.classList.add('active');
   console.log('markup: ' + markup);
   console.log(done);
   return listArray;
