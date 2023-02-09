@@ -14,7 +14,7 @@ searchBox.addEventListener(
       .then(data => {
         if (data.length === 1) {
           console.log('found one country');
-          renderCard(data[0]);
+          renderInfo(data[0]);
           return;
         }
         if (data.length > 10) {
@@ -35,22 +35,22 @@ function inputToQuery() {
   return searchBox.value;
 }
 
-function renderCard({ name, capital, population, flags, languages }) {
+function renderInfo({ name, capital, population, flags, languages }) {
   countryList.innerHTML = '';
   console.log(name.official);
   console.log(capital[0]);
   console.log(population);
   console.log(flags.svg);
   console.log(Object.values(languages));
-  const markup = `<div class="country-card__name-container"><img src="${
+  const markup = `<div class="country-info__name-container"><img src="${
     flags.svg
   }" alt="Flag of ${
     name.official
-  }" width="200" height="" /><p class="country-list__name">${
+  }" width="200" height="" /><p class="country-info__name">${
     name.official
-  }</p></div><div class='country-card__capital'>${
+  }</p></div><div class='country-info__capital'>${
     capital[0]
-  }</div><div class='country-card__population'>${population}</div><div class='country-card__languages'>${Object.values(
+  }</div><div class='country-info__population'>${population}</div><div class='country-info__languages'>${Object.values(
     languages
   )}</div>`;
 
