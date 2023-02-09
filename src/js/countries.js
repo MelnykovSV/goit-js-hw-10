@@ -13,26 +13,22 @@ searchBox.addEventListener(
     fetchCountries(valueToSearch)
       .then(data => {
         if (data.length === 1) {
-          console.log('found one country');
           renderInfo(data[0]);
           return;
         }
         if (data.length > 10) {
           Notiflix.Notify.warning('To many countries found');
-          console.log('To many countries found');
           countryInfo.classList.remove('active');
           countryList.classList.remove('active');
           countryInfo.classList.add('visually-hidden');
           countryList.classList.add('visually-hidden');
           return;
         }
-        // console.log(data);
         renderList(data);
         return data;
       })
       .catch(error => {
         Notiflix.Notify.failure('Oops, there is no country with that name');
-        console.log(error);
         countryInfo.classList.remove('active');
         countryList.classList.remove('active');
         countryInfo.classList.add('visually-hidden');
@@ -50,11 +46,6 @@ function renderInfo({ name, capital, population, flags, languages }) {
   countryList.classList.remove('active');
 
   countryList.classList.add('visually-hidden');
-  console.log(name.official);
-  console.log(capital[0]);
-  console.log(population);
-  console.log(flags.svg);
-  console.log(Object.values(languages));
   const markup = `<div class="country-info__name-container"><img src="${
     flags.svg
   }" alt="Flag of ${
@@ -67,7 +58,6 @@ function renderInfo({ name, capital, population, flags, languages }) {
     languages
   ).join(', ')}</div>`;
 
-  // console.log(Object.values(languages).join(', '));
   countryInfo.classList.add('active');
   countryInfo.classList.remove('visually-hidden');
   countryInfo.innerHTML = markup;
@@ -76,14 +66,12 @@ function renderList(arrayOfObjects) {
   countryInfo.classList.remove('active');
   countryInfo.classList.add('visually-hidden');
   countryInfo.innerHTML = '';
-  console.log('started');
   const listArray = arrayOfObjects.map(item => {
     const listData = {};
     listData.name = item.name;
     listData.flag = item.flags.svg;
     return listData;
   });
-  console.log(listArray);
   const markup = listArray
     .map(item => {
       return `<li class="country-list__item"><img src="${item.flag}" alt="Flag of ${name.official}" width="40" height="" class="country-list__flag"/><p class="country-list__name">${item.name.official}</p></li>`;
@@ -93,6 +81,5 @@ function renderList(arrayOfObjects) {
   countryList.innerHTML = markup;
   countryList.classList.add('active');
   countryList.classList.remove('visually-hidden');
-  console.log('markup: ' + markup);
   return listArray;
 }
