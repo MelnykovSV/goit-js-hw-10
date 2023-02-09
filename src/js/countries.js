@@ -46,7 +46,7 @@ function renderInfo({ name, capital, population, flags, languages }) {
     flags.svg
   }" alt="Flag of ${
     name.official
-  }" width="200" height="" /><p class="country-info__name">${
+  }" width="200" height="" class="country-info__flag"/><p class="country-info__name">${
     name.official
   }</p></div><div class='country-info__capital'>${
     capital[0]
@@ -69,11 +69,13 @@ function renderList(arrayOfObjects) {
   console.log(listArray);
   const markup = listArray
     .map(item => {
-      return `<li class="country-list__item"><img src="${item.flag}" alt="Flag of ${name.official}" width="200" height="" /><p class="country-list__name">${item.name.official}</p></li>`;
+      return `<li class="country-list__item"><img src="${item.flag}" alt="Flag of ${name.official}" width="40" height="" class="country-list__flag"/><p class="country-list__name">${item.name.official}</p></li>`;
     })
     .join('');
 
   countryList.innerHTML = markup;
+  countryList.classList.add('animate__animated');
+  countryList.classList.add('animate__slideInDown');
   console.log('markup: ' + markup);
   console.log(done);
   return listArray;
