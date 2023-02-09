@@ -39,11 +39,11 @@ p {
   background-color: aliceblue;
   transition: transform 350ms linear;
   transform-origin: top;
-  transform: translateY(-110%);
+  transform: translateY(-110%) scaleY(0);
+  padding: 20px 10px;
 }
 .country-list.active {
-  transform: translateY(0);
-  padding: 20px 10px;
+  transform: translateY(0) scaleY(1);
 }
 .search-form__list-container,
 .search-form__info-container {
@@ -56,16 +56,19 @@ p {
   transition: transform 350ms linear;
   transform-origin: top;
   transform: translateY(-110%);
+  padding: 20px 10px;
 }
 .country-info.active {
   transform: translateY(0);
-  padding: 20px 10px;
 }
 
 .country-list__item {
   display: flex;
   align-items: center;
   gap: 30px;
+}
+
+.country-list__item:not(:last-child) {
   margin-bottom: 20px;
 }
 .country-list__name {
