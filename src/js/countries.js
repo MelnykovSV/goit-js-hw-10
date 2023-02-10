@@ -11,6 +11,10 @@ searchBox.addEventListener(
   debounce(() => {
     const valueToSearch = searchBox.value.trim();
     if (!valueToSearch) {
+      clearElements(countryInfo, countryList);
+      hide(countryInfo, countryList);
+      console.log('nothing');
+
       return;
     }
 
@@ -18,6 +22,7 @@ searchBox.addEventListener(
       .then(data => {
         if (data.length > 10) {
           Notiflix.Notify.warning('To many countries found');
+          clearElements(countryInfo, countryList);
           hide(countryInfo, countryList);
           return;
         }
@@ -38,7 +43,7 @@ searchBox.addEventListener(
 //renders country card
 
 function renderInfo({ name, capital, population, flags, languages }) {
-  countryList.innerHTML = '';
+  clearElements(countryList);
   hide(countryList);
   const markup = `<div class="country-info__name-container"><img src="${
     flags.svg
@@ -59,7 +64,7 @@ function renderInfo({ name, capital, population, flags, languages }) {
 //renders countries list
 
 function renderList(arrayOfObjects) {
-  countryInfo.innerHTML = '';
+  clearElements(countryInfo);
   hide(countryInfo);
   const listArray = arrayOfObjects.map(item => {
     const listData = {};
@@ -93,5 +98,14 @@ function show() {
   for (let i = 0; i < arguments.length; i += 1) {
     arguments[i].classList.add('active');
     arguments[i].classList.remove('visually-hidden');
+  }
+}
+
+// clears given Elements
+
+function clearElements() {
+  for (let i = 0; i < arguments.length; i += 1) {
+    arguments[i].innerHTML = '';
+    arguments[i].innerHTML = '';
   }
 }
