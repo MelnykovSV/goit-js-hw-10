@@ -4,11 +4,15 @@ const debounce = require('lodash.debounce');
 const searchBox = document.querySelector('#search-box');
 const countryList = document.querySelector('.country-list');
 const countryInfo = document.querySelector('.country-info');
+const DEBOUNCE_DELAY = 300;
 
 searchBox.addEventListener(
   'input',
   debounce(() => {
-    const valueToSearch = searchBox.value;
+    const valueToSearch = searchBox.value.trim();
+    if (!valueToSearch) {
+      return;
+    }
 
     fetchCountries(valueToSearch)
       .then(data => {
@@ -28,12 +32,8 @@ searchBox.addEventListener(
         Notiflix.Notify.failure('Oops, there is no country with that name');
         hide(countryInfo, countryList);
       });
-  }, 300)
+  }, DEBOUNCE_DELAY)
 );
-
-// function inputToQuery() {
-//   return searchBox.value;
-// }
 
 function renderInfo({ name, capital, population, flags, languages }) {
   countryList.innerHTML = '';
@@ -55,8 +55,8 @@ function renderInfo({ name, capital, population, flags, languages }) {
 }
 
 function renderList(arrayOfObjects) {
-  hide(countryInfo);
   countryInfo.innerHTML = '';
+  hide(countryInfo);
   const listArray = arrayOfObjects.map(item => {
     const listData = {};
     listData.name = item.name;
