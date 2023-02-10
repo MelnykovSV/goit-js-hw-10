@@ -39,11 +39,11 @@ p {
   background-color: aliceblue;
   transition: transform 350ms linear;
   transform-origin: top;
-  transform: translateY(-110%) scaleY(0);
+  transform: translateY(-110%);
   padding: 20px 10px;
 }
 .country-list.active {
-  transform: translateY(0) scaleY(1);
+  transform: translateY(0);
 }
 .search-form__list-container,
 .search-form__info-container {
