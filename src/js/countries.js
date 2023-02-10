@@ -35,6 +35,8 @@ searchBox.addEventListener(
   }, DEBOUNCE_DELAY)
 );
 
+//renders country card
+
 function renderInfo({ name, capital, population, flags, languages }) {
   countryList.innerHTML = '';
   hide(countryList);
@@ -53,6 +55,8 @@ function renderInfo({ name, capital, population, flags, languages }) {
   countryInfo.innerHTML = markup;
   show(countryInfo);
 }
+
+//renders countries list
 
 function renderList(arrayOfObjects) {
   countryInfo.innerHTML = '';
@@ -74,12 +78,16 @@ function renderList(arrayOfObjects) {
   return listArray;
 }
 
+//hides elements
+
 function hide() {
   for (let i = 0; i < arguments.length; i += 1) {
     arguments[i].classList.remove('active');
     arguments[i].classList.add('visually-hidden');
   }
 }
+
+//shows elements
 
 function show() {
   for (let i = 0; i < arguments.length; i += 1) {
