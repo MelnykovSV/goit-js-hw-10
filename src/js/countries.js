@@ -8,40 +8,32 @@ const countryInfo = document.querySelector('.country-info');
 searchBox.addEventListener(
   'input',
   debounce(() => {
-    const valueToSearch = inputToQuery();
+    const valueToSearch = searchBox.value;
 
     fetchCountries(valueToSearch)
       .then(data => {
-        if (data.length === 1) {
-          renderInfo(data[0]);
-          return;
-        }
         if (data.length > 10) {
           Notiflix.Notify.warning('To many countries found');
-          // countryInfo.classList.remove('active');
-          // countryList.classList.remove('active');
-          // countryInfo.classList.add('visually-hidden');
-          // countryList.classList.add('visually-hidden');
           hide(countryInfo, countryList);
+          return;
+        }
+        if (data.length === 1) {
+          renderInfo(data[0]);
           return;
         }
         renderList(data);
         return data;
       })
-      .catch(error => {
+      .catch(() => {
         Notiflix.Notify.failure('Oops, there is no country with that name');
         hide(countryInfo, countryList);
-        // countryInfo.classList.remove('active');
-        // countryList.classList.remove('active');
-        // countryInfo.classList.add('visually-hidden');
-        // countryList.classList.add('visually-hidden');
       });
   }, 300)
 );
 
-function inputToQuery() {
-  return searchBox.value;
-}
+// function inputToQuery() {
+//   return searchBox.value;
+// }
 
 function renderInfo({ name, capital, population, flags, languages }) {
   countryList.innerHTML = '';
