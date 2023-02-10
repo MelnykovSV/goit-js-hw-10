@@ -19,7 +19,9 @@ searchBox.addEventListener(
     fetchCountries(valueToSearch)
       .then(data => {
         if (data.length > 10) {
-          Notiflix.Notify.warning('To many countries found');
+          Notiflix.Notify.warning(
+            'To many countries found. Please enter a more specific name.'
+          );
           clearElements(countryInfo, countryList);
           hide(countryInfo, countryList);
           return;
