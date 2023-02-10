@@ -13,8 +13,6 @@ searchBox.addEventListener(
     if (!valueToSearch) {
       clearElements(countryInfo, countryList);
       hide(countryInfo, countryList);
-      console.log('nothing');
-
       return;
     }
 
