@@ -18,10 +18,11 @@ searchBox.addEventListener(
         }
         if (data.length > 10) {
           Notiflix.Notify.warning('To many countries found');
-          countryInfo.classList.remove('active');
-          countryList.classList.remove('active');
-          countryInfo.classList.add('visually-hidden');
-          countryList.classList.add('visually-hidden');
+          // countryInfo.classList.remove('active');
+          // countryList.classList.remove('active');
+          // countryInfo.classList.add('visually-hidden');
+          // countryList.classList.add('visually-hidden');
+          hide(countryInfo, countryList);
           return;
         }
         renderList(data);
@@ -29,10 +30,11 @@ searchBox.addEventListener(
       })
       .catch(error => {
         Notiflix.Notify.failure('Oops, there is no country with that name');
-        countryInfo.classList.remove('active');
-        countryList.classList.remove('active');
-        countryInfo.classList.add('visually-hidden');
-        countryList.classList.add('visually-hidden');
+        hide(countryInfo, countryList);
+        // countryInfo.classList.remove('active');
+        // countryList.classList.remove('active');
+        // countryInfo.classList.add('visually-hidden');
+        // countryList.classList.add('visually-hidden');
       });
   }, 300)
 );
@@ -43,9 +45,7 @@ function inputToQuery() {
 
 function renderInfo({ name, capital, population, flags, languages }) {
   countryList.innerHTML = '';
-  countryList.classList.remove('active');
-
-  countryList.classList.add('visually-hidden');
+  hide(countryList);
   const markup = `<div class="country-info__name-container"><img src="${
     flags.svg
   }" alt="Flag of ${
@@ -58,13 +58,12 @@ function renderInfo({ name, capital, population, flags, languages }) {
     languages
   ).join(', ')}</div>`;
 
-  countryInfo.classList.add('active');
-  countryInfo.classList.remove('visually-hidden');
   countryInfo.innerHTML = markup;
+  show(countryInfo);
 }
+
 function renderList(arrayOfObjects) {
-  countryInfo.classList.remove('active');
-  countryInfo.classList.add('visually-hidden');
+  hide(countryInfo);
   countryInfo.innerHTML = '';
   const listArray = arrayOfObjects.map(item => {
     const listData = {};
@@ -79,7 +78,20 @@ function renderList(arrayOfObjects) {
     .join('');
 
   countryList.innerHTML = markup;
-  countryList.classList.add('active');
-  countryList.classList.remove('visually-hidden');
+  show(countryList);
   return listArray;
+}
+
+function hide() {
+  for (let i = 0; i < arguments.length; i += 1) {
+    arguments[i].classList.remove('active');
+    arguments[i].classList.add('visually-hidden');
+  }
+}
+
+function show() {
+  for (let i = 0; i < arguments.length; i += 1) {
+    arguments[i].classList.add('active');
+    arguments[i].classList.remove('visually-hidden');
+  }
 }
